@@ -2,16 +2,18 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
-} from 'react-native';
-import _ from 'lodash';
-import { connect } from 'react-redux';
+  View,
+} from 'react-native'
+import { connect } from 'react-redux'
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+    flex: 1,
+  },
+})
 
 class MainView extends Component {
-
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     this.props.dispatch({ type: 'testing'})
@@ -26,15 +28,4 @@ class MainView extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20,
-    flex: 1,
-  },
-})
-
-// function mapStateToProps(state) {
-//   return { null }
-// }
-
-export default connect()(MainView);
+export default connect()(MainView)
