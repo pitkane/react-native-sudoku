@@ -7,7 +7,7 @@ Work in progress :)
 ## Tech stack
 * React-Native
 * React
-* Redux
+* Redux (redux-thunk)
 
 ###
 
