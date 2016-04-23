@@ -1,7 +1,7 @@
 React-Native flavored Sudoku
 =======================
 
-Work in progress :)
+Work in progress, check worklog.md. Creating blog post from this: "Getting started with React-Native by building simple Sudoku app for iOS and Android."
 
 
 ## Tech stack
