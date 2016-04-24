@@ -1,7 +1,11 @@
 
 
 const defaultState = {
-  // test: ''
+  puzzle: null,
+  // hintsLeft
+  // startTime
+  // playing
+
 }
 
 // none, loading, ready, failed
