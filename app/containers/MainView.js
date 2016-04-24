@@ -3,6 +3,7 @@ import React, {
   StyleSheet,
   View,
   Dimensions,
+  StatusBar,
 } from 'react-native'
 import { connect } from 'react-redux'
 import sudoku from './sudoku.js'
@@ -17,6 +18,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    backgroundColor: '#3d454c',
   },
   topBarContainer: {
     flex: 1,
@@ -35,6 +37,10 @@ const styles = StyleSheet.create({
 })
 
 class MainView extends Component {
+
+  componentWillMount() {
+    StatusBar.setHidden(true)
+  }
 
   componentDidMount() {
     this.props.dispatch({ type: 'testing' })

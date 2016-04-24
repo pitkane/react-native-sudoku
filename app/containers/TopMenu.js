@@ -11,18 +11,31 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#ff8068',
   },
   menuButton: {
     flex: 1,
     alignItems: 'center',
   },
+  menuButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
   noteButton: {
     flex: 1,
     alignItems: 'center',
   },
-  HintsButtons: {
+  noteButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  hintsButtons: {
     flex: 1,
     alignItems: 'center',
+  },
+  hintsButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
 })
 
@@ -35,17 +48,17 @@ class TopMenu extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.menuButton}>
-          <Text>
+          <Text style={styles.menuButtonText}>
             Menu
           </Text>
         </View>
         <View style={styles.noteButton}>
-          <Text>
+          <Text style={styles.noteButtonText}>
             Note
           </Text>
         </View>
-        <View style={styles.HintsButtons}>
-          <Text>
+        <View style={styles.hintsButtons}>
+          <Text style={styles.hintsButtonText}>
             Hints
           </Text>
         </View>
