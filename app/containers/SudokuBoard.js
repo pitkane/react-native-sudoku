@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#dbdcdd',
   },
   numberContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: Dimensions.get('window').width / 9,
     height: Dimensions.get('window').width / 9,
   },

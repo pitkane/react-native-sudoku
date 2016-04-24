@@ -43,10 +43,22 @@ class MainView extends Component {
   }
 
   componentDidMount() {
+    const COLS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+    const ROWS = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    const BOARD = {}
+
+    for (const colItem of COLS) {
+      for (const rowItem of ROWS) {
+        BOARD[colItem + rowItem] = null
+      }
+    }
+    console.log(BOARD)
     this.props.dispatch({ type: 'testing' })
     const puzzle = sudoku.generate('hard')
+    const serialized = sudoku.serialize(puzzle)
     console.log(sudoku)
     console.log(puzzle)
+    console.log(serialized)
   }
 
   render() {
