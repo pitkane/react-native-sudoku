@@ -1,6 +1,8 @@
 React-Native flavored Sudoku
 =======================
 
+![React-Native flavored Sudoku](https://drive.google.com/uc?export=download&id=0BwWdduICTQArdmswdWh0LXVuWXM)
+
 Work in progress, check worklog.md. Creating blog post from this: "Getting started with React-Native by building simple Sudoku app for iOS and Android."
 
 
