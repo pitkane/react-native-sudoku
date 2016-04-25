@@ -4,9 +4,12 @@ import React, {
   View,
   Dimensions,
   StatusBar,
+  Text,
 } from 'react-native'
 import { connect } from 'react-redux'
-import sudoku from './sudoku.js'
+import { bindActionCreators } from 'redux'
+
+import * as SudokuActions from '../actions/sudoku'
 
 import TopBar from './TopBar'
 import TopMenu from './TopMenu'
@@ -37,31 +40,19 @@ const styles = StyleSheet.create({
 })
 
 class MainView extends Component {
-
   componentWillMount() {
     StatusBar.setHidden(true)
-  }
-
-  componentDidMount() {
-    const COLS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
-    const ROWS = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    const BOARD = {}
-
-    for (const colItem of COLS) {
-      for (const rowItem of ROWS) {
-        BOARD[colItem + rowItem] = null
-      }
-    }
-    console.log(BOARD)
-    this.props.dispatch({ type: 'testing' })
-    const puzzle = sudoku.generate('hard')
-    const serialized = sudoku.serialize(puzzle)
-    console.log(sudoku)
-    console.log(puzzle)
-    console.log(serialized)
+    this.props.actions.generateGame()
   }
 
   render() {
+    if (this.props.sudoku.isLoading) {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      )
+    }
     return (
       <View style={styles.mainContainer}>
         <View style={styles.topBarContainer} >
@@ -71,10 +62,17 @@ class MainView extends Component {
           <TopMenu />
         </View>
         <View style={styles.sudokuBoardContainer} >
-          <SudokuBoard />
+          <SudokuBoard
+            selectedNumber={this.props.sudoku.selectedNumber}
+            board={this.props.sudoku.board}
+          />
         </View>
         <View style={styles.sudokuNumberButtonsContainer} >
-          <SudokuNumberButtons />
+          <SudokuNumberButtons
+            actions={this.props.actions}
+            board={this.props.sudoku.board}
+            selectedIndex={this.props.sudoku.selectedNumber}
+          />
         </View>
       </View>
     )
@@ -83,9 +81,22 @@ class MainView extends Component {
 }
 
 MainView.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
+  dispatch: React.PropTypes.func,
+  actions: React.PropTypes.object,
+  sudoku: React.PropTypes.object,
 }
 
-// mapStateToProps
+const mapStateToProps = (state) => {
+  return {
+    sudoku: state.sudoku,
+  }
+}
 
-export default connect()(MainView)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(SudokuActions, dispatch),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainView)

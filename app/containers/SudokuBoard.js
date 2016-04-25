@@ -1,26 +1,25 @@
 import React, {
   Component,
   StyleSheet,
-  Text,
+//  Text,
   View,
   Dimensions,
 } from 'react-native'
+import _ from 'lodash'
 
+import SudokuNumber from './SudokuNumber'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#dbdcdd',
-  },
-  numberContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: Dimensions.get('window').width / 9,
-    height: Dimensions.get('window').width / 9,
+    margin: (Dimensions.get('window').width - (_.floor((Dimensions.get('window').width / 9)) * 9)) / 2,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // borderWidth: 1,
   },
 })
 
@@ -29,33 +28,24 @@ class SudokuBoard extends Component {
   componentDidMount() {
   }
 
-  renderBoard() {
-    const rows = []
-
-    for (let i = 1; i < 82; i++) {
-      rows.push(this.renderNumber(i))
-    }
-    return rows
-  }
-
-  renderNumber(number) {
-    return (
-      <View key={number} style={styles.numberContainer}>
-        <Text>
-          {number}
-        </Text>
-      </View>
-    )
-  }
-
   render() {
+    const board = this.props.board
+    // console.log(board)
     return (
       <View style={styles.container}>
-        {this.renderBoard()}
-        {/* <Text>SudokuBoard: ({Dimensions.get('window').width}, {Dimensions.get('window').height})</Text> */}
+        {Object.keys(board).map(key => {
+          let isSelected = false
+          if (this.props.selectedNumber === key) isSelected = true
+          return <SudokuNumber selected={isSelected} number={board[key]} key={key} keyId={key} />
+        })}
       </View>
     )
   }
+}
+
+SudokuBoard.propTypes = {
+  board: React.PropTypes.object.isRequired,
+  selectedNumber: React.PropTypes.string,
 }
 
 export default SudokuBoard

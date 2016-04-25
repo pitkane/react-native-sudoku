@@ -2,8 +2,9 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View,
+  TouchableHighlight,
   Dimensions,
+  View,
 } from 'react-native'
 
 const topRow = ['1', '2', '3', '4', '5']
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   numberText: {
     fontWeight: '600',
     fontSize: 24,
-    color: 'white'
+    color: 'white',
   },
 })
 
@@ -40,13 +41,24 @@ class SudokuNumberButtons extends Component {
   componentDidMount() {
   }
 
-  renderNumber(item) {
+  _onNumberPress(number) {
+    if (this.props.selectedIndex !== null) {
+      this.props.actions.insertNumber(number, this.props.selectedIndex, this.props.board)
+      this.props.actions.clearSelection()
+    }
+  }
+
+  renderNumber(number) {
     return (
-      <View key={item} style={styles.numberContainer}>
+      <TouchableHighlight
+        key={number}
+        style={styles.numberContainer}
+        onPress={this._onNumberPress.bind(this, number)}
+      >
         <Text style={styles.numberText}>
-          {item}
+          {number}
         </Text>
-      </View>
+      </TouchableHighlight>
     )
   }
 
@@ -62,6 +74,12 @@ class SudokuNumberButtons extends Component {
       </View>
     )
   }
+}
+
+SudokuNumberButtons.propTypes = {
+  actions: React.PropTypes.object,
+  board: React.PropTypes.object.isRequired,
+  selectedIndex: React.PropTypes.string,
 }
 
 export default SudokuNumberButtons

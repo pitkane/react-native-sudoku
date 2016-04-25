@@ -1,5 +1,5 @@
 import sudoku from './sudoku'
 
 export {
-  sudoku
-};
+  sudoku,
+}
