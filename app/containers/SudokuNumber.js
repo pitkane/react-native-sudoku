@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   affected: {
     borderColor: '#00aca6',
-    borderWidth: 2,
+    borderWidth: 1,
   },
   textStyle: {
     fontSize: 18,
@@ -71,11 +71,17 @@ class SudokuNumber extends Component {
   }
 
   render() {
+    const defaultStyle = [
+      styles.numberContainer,
+      this.state.selected && styles.selected,
+      this.state.isAffected && styles.affected,
+    ]
+    const computedStyle = defaultStyle.concat(this.props.appendStyle)
 
     return (
       <TouchableHighlight
         onPress={this._onPressButton}
-        style={[styles.numberContainer, this.state.selected && styles.selected, this.state.isAffected && styles.affected]}
+        style={computedStyle}
       >
         <Text style={styles.textStyle}>
           {this.props.number}
@@ -91,6 +97,7 @@ SudokuNumber.propTypes = {
   selected: React.PropTypes.bool,
   keyId: React.PropTypes.string,
   isAffected: React.PropTypes.bool,
+  appendStyle: React.PropTypes.array,
 }
 
 export default connect()(SudokuNumber)
