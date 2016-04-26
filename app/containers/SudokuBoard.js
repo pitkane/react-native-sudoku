@@ -30,13 +30,28 @@ class SudokuBoard extends Component {
 
   render() {
     const board = this.props.board
-    // console.log(board)
+    // console.log(this.props)
     return (
       <View style={styles.container}>
         {Object.keys(board).map(key => {
           let isSelected = false
-          if (this.props.selectedNumber === key) isSelected = true
-          return <SudokuNumber selected={isSelected} number={board[key]} key={key} keyId={key} />
+          let isAffected = false
+          if (this.props.selectedNumber === key) {
+            isSelected = true
+          }
+          if (_.get(this.props.affectedIndexes, key) !== undefined) {
+            // console.log(_.get(this.props.affectedIndexes, key))
+            isAffected = true
+          }
+          return (
+            <SudokuNumber
+              isAffected={isAffected}
+              selected={isSelected}
+              number={board[key]}
+              key={key}
+              keyId={key}
+            />
+          )
         })}
       </View>
     )
@@ -46,6 +61,7 @@ class SudokuBoard extends Component {
 SudokuBoard.propTypes = {
   board: React.PropTypes.object.isRequired,
   selectedNumber: React.PropTypes.string,
+  affectedIndexes: React.PropTypes.object,
 }
 
 export default SudokuBoard

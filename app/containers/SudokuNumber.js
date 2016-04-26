@@ -6,6 +6,7 @@ import React, {
   Dimensions,
 } from 'react-native'
 import { connect } from 'react-redux'
+import * as SudokuActions from '../actions/sudoku'
 import _ from 'lodash'
 
 const styles = StyleSheet.create({
@@ -19,7 +20,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   selected: {
+    backgroundColor: '#aaacb1',
     borderWidth: 1,
+  },
+  affected: {
+    borderColor: '#00aca6',
+    borderWidth: 2,
   },
   textStyle: {
     fontSize: 18,
@@ -35,6 +41,7 @@ class SudokuNumber extends Component {
 
     this.state = {
       selected: false,
+      isAffected: false,
     }
   }
 
@@ -47,21 +54,28 @@ class SudokuNumber extends Component {
     } else {
       this.setState({ selected: false })
     }
+    if (nextProps.isAffected) {
+      this.setState({ isAffected: true })
+    } else {
+      this.setState({ isAffected: false })
+    }
   }
 
   _onPressButton() {
     if (this.state.selected) {
-      this.props.dispatch({ type: 'SUDOKU_SELECT_NUMBER', payload: null })
+      this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
     } else {
-      this.props.dispatch({ type: 'SUDOKU_SELECT_NUMBER', payload: this.props.keyId })
+      // this.props.dispatch({ type: 'SUDOKU_SELECT_NUMBER', payload: this.props.keyId })
+      this.props.dispatch(SudokuActions.selectNumber(this.props.keyId))
     }
   }
 
   render() {
+
     return (
       <TouchableHighlight
         onPress={this._onPressButton}
-        style={[styles.numberContainer, this.state.selected && styles.selected]}
+        style={[styles.numberContainer, this.state.selected && styles.selected, this.state.isAffected && styles.affected]}
       >
         <Text style={styles.textStyle}>
           {this.props.number}
@@ -76,6 +90,7 @@ SudokuNumber.propTypes = {
   number: React.PropTypes.string,
   selected: React.PropTypes.bool,
   keyId: React.PropTypes.string,
+  isAffected: React.PropTypes.bool,
 }
 
 export default connect()(SudokuNumber)

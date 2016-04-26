@@ -64,6 +64,7 @@ class MainView extends Component {
         <View style={styles.sudokuBoardContainer} >
           <SudokuBoard
             selectedNumber={this.props.sudoku.selectedNumber}
+            affectedIndexes={this.props.sudoku.affectedIndexes}
             board={this.props.sudoku.board}
           />
         </View>
