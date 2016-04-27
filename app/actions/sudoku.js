@@ -56,7 +56,6 @@ export function selectNumber(index) {
   for (const item of ROWS) {
     _.set(affectedIndexes, item + col, true)
   }
-  console.log(affectedIndexes)
 
   return {
     type: SUDOKU_SELECT_NUMBER,

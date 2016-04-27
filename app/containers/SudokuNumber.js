@@ -28,14 +28,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   textStyle: {
-    fontSize: 18,
+    fontSize: 24,
+    color: '#3d454c',
+    fontWeight: '600',
+    textShadowColor: 'white',
+    textShadowOffset: { width: 1, height: 1 },
   },
 })
 
 class SudokuNumber extends Component {
 
   constructor(props) {
-    console.log()
     super(props)
     this._onPressButton = this._onPressButton.bind(this)
 

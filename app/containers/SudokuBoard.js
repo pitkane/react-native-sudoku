@@ -46,51 +46,30 @@ class SudokuBoard extends Component {
 
   render() {
     const board = this.props.board
-    // console.log(this.props)
     return (
       <View style={styles.container}>
         {Object.keys(board).map(key => {
+          const row = key[0]
+          const column = key[1]
           let isSelected = false
           let isAffected = false
           let appendStyle = []
-          if (key[0] === 'C') {
-            if (key[1] === '3') appendStyle.push(styles.borderRight)
-            else if (key[1] === '4') appendStyle.push(styles.borderLeft)
-            else if (key[1] === '6') appendStyle.push(styles.borderRight)
-            else if (key[1] === '7') appendStyle.push(styles.borderLeft)
-            appendStyle.push(styles.borderBottom)
+
+          if (row === 'C' || row === 'D' || row === 'F' || row === 'G') {
+            if (row === 'C' || row === 'F') {
+              appendStyle.push(styles.borderBottom)
+            } else {
+              appendStyle.push(styles.borderTop)
+            }
           }
-          else if (key[0] === 'D') {
-            if (key[1] === '3') appendStyle.push(styles.borderRight)
-            else if (key[1] === '4') appendStyle.push(styles.borderLeft)
-            else if (key[1] === '6') appendStyle.push(styles.borderRight)
-            else if (key[1] === '7') appendStyle.push(styles.borderLeft)
-            appendStyle.push(styles.borderTop)
-          }
-          else if (key[0] === 'F') {
-            if (key[1] === '3') appendStyle.push(styles.borderRight)
-            else if (key[1] === '4') appendStyle.push(styles.borderLeft)
-            else if (key[1] === '6') appendStyle.push(styles.borderRight)
-            else if (key[1] === '7') appendStyle.push(styles.borderLeft)
-            appendStyle.push(styles.borderBottom)
-          }
-          else if (key[0] === 'G') {
-            if (key[1] === '3') appendStyle.push(styles.borderRight)
-            else if (key[1] === '4') appendStyle.push(styles.borderLeft)
-            else if (key[1] === '6') appendStyle.push(styles.borderRight)
-            else if (key[1] === '7') appendStyle.push(styles.borderLeft)
-            appendStyle.push(styles.borderTop)
-          }
-          else if (key[1] === '3') appendStyle.push(styles.borderRight)
-          else if (key[1] === '4') appendStyle.push(styles.borderLeft)
-          else if (key[1] === '6') appendStyle.push(styles.borderRight)
-          else if (key[1] === '7') appendStyle.push(styles.borderLeft)
+
+          if (column === '3' || column === '6') appendStyle.push(styles.borderRight)
+          else if (column === '4' || column === '7') appendStyle.push(styles.borderLeft)
 
           if (this.props.selectedNumber === key) {
             isSelected = true
           }
           if (_.get(this.props.affectedIndexes, key) !== undefined) {
-            // console.log(_.get(this.props.affectedIndexes, key))
             isAffected = true
           }
           return (
