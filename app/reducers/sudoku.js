@@ -2,6 +2,7 @@
 
 const defaultState = {
   board: null,
+  original: null,
   // hintsLeft
   selectedNumber: null,
   affectedIndexes: null,
@@ -15,11 +16,11 @@ const defaultState = {
 export default function sudoku(state = defaultState, action) {
   switch (action.type) {
     case 'SUDOKU_NEW_GAME':
-      return Object.assign({}, state, { playing: true, isLoading: false, board: action.payload.board })
-    case 'SUDOKU_SELECT_NUMBER':
-      return Object.assign({}, state,
-        { selectedNumber: action.payload.selected, affectedIndexes: action.payload.affected }
-      )
+      return Object.assign({}, state, { playing: true, isLoading: false, board: action.payload.board, original: action.payload.original })
+    case 'SUDOKU_SELECT_INDEX':
+      return Object.assign({}, state, { selectedNumber: action.payload })
+    case 'SUDOKU_UPDATE_AFFECTED':
+      return Object.assign({}, state, { affectedIndexes: action.payload })
     case 'SUDOKU_CLEAR_SELECTION':
       return Object.assign({}, state, { selectedNumber: null, affectedIndexes: null })
     case 'SUDOKU_INSERT_NUMBER':

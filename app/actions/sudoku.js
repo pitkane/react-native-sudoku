@@ -5,10 +5,11 @@ import {
   COLS,
   ROWS,
   INDEXES,
-  SUDOKU_SELECT_NUMBER,
+  SUDOKU_SELECT_INDEX,
   SUDOKU_CLEAR_SELECTION,
   SUDOKU_NEW_GAME,
-  SUDOKU_INSERT_NUMBER } from '../containers/constants'
+  SUDOKU_INSERT_NUMBER,
+  SUDOKU_UPDATE_AFFECTED } from '../containers/constants'
 
 export function clearSelection() {
   return {
@@ -31,6 +32,7 @@ export function generateGame(difficulty = 'medium') {
     type: SUDOKU_NEW_GAME,
     payload: {
       board: mergedBoard,
+      original: puzzle,
     },
   }
 }
@@ -45,7 +47,7 @@ export function insertNumber(number, selectedIndex, board) {
   }
 }
 
-export function selectNumber(index) {
+export function updateAffected(index) {
   const affectedIndexes = { }
   const row = index[0]
   const col = index[1]
@@ -58,7 +60,28 @@ export function selectNumber(index) {
   }
 
   return {
-    type: SUDOKU_SELECT_NUMBER,
-    payload: { selected: index, affected: affectedIndexes },
+    type: SUDOKU_UPDATE_AFFECTED,
+    payload: affectedIndexes,
+  }
+}
+
+// export function selectNumber(index) {
+//
+//   return {
+//     type: SUDOKU_SELECT_NUMBER,
+//     payload: index,
+//   }
+// }
+
+export function selectIndex(index) {
+  return (dispatch, getState) => {
+    const state = getState()
+    if (_.has(state.sudoku.original, index)) return
+
+    dispatch({
+      type: 'SUDOKU_SELECT_INDEX',
+      payload: index,
+    })
+    dispatch(updateAffected(index))
   }
 }

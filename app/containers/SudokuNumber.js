@@ -43,6 +43,7 @@ class SudokuNumber extends Component {
     this._onPressButton = this._onPressButton.bind(this)
 
     this.state = {
+      number: props.number,
       selected: false,
       isAffected: false,
     }
@@ -52,6 +53,8 @@ class SudokuNumber extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({ number: nextProps.number })
+
     if (nextProps.selected) {
       this.setState({ selected: true })
     } else {
@@ -69,7 +72,14 @@ class SudokuNumber extends Component {
       this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
     } else {
       // this.props.dispatch({ type: 'SUDOKU_SELECT_NUMBER', payload: this.props.keyId })
-      this.props.dispatch(SudokuActions.selectNumber(this.props.keyId))
+      // this.props.dispatch(SudokuActions.selectNumber(this.props.keyId))
+      // this.setState({ selected: true })
+      this.props.dispatch(SudokuActions.selectIndex(this.props.keyId))
+      // .then(() => {
+      //   this.props.dispatch(SudokuActions.updateAffected(this.props.keyId))
+      // })
+      // this.props.dispatch({ type: 'SUDOKU_SELECT_INDEX', payload: this.props.keyId })
+      // this.props.dispatch(SudokuActions.updateAffected(this.props.keyId))
     }
   }
 
@@ -87,7 +97,7 @@ class SudokuNumber extends Component {
         style={computedStyle}
       >
         <Text style={styles.textStyle}>
-          {this.props.number}
+          {this.state.number}
         </Text>
       </TouchableHighlight>
     )
