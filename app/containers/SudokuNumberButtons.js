@@ -6,6 +6,8 @@ import React, {
   Dimensions,
   View,
 } from 'react-native'
+import { connect } from 'react-redux'
+import { insertNumber, clearSelection } from '../actions/sudoku'
 
 const topRow = ['1', '2', '3', '4', '5']
 const bottomRow = ['6', '7', '8', '9', 'X']
@@ -43,9 +45,11 @@ class SudokuNumberButtons extends Component {
 
   _onNumberPress(number) {
     if (this.props.selectedIndex !== null) {
-      this.props.actions.insertNumber(number, this.props.selectedIndex, this.props.board)
-      this.props.actions.clearSelection()
+      // this.props.actions.insertNumber(number, this.props.selectedIndex, this.props.board)
+      this.props.dispatch(insertNumber(number))
+      this.props.dispatch(clearSelection())
     }
+    // this.props.dispatch({ type: 'SUDOKU_STOP_PLAYING' })
   }
 
   renderNumber(number) {
@@ -77,9 +81,14 @@ class SudokuNumberButtons extends Component {
 }
 
 SudokuNumberButtons.propTypes = {
-  actions: React.PropTypes.object,
-  board: React.PropTypes.object.isRequired,
+  dispatch: React.PropTypes.func,
   selectedIndex: React.PropTypes.string,
 }
 
-export default SudokuNumberButtons
+const mapStateToProps = (state) => {
+  return {
+    selectedIndex: state.sudoku.selected,
+  }
+}
+
+export default connect(mapStateToProps)(SudokuNumberButtons)

@@ -7,9 +7,9 @@ import React, {
   Text,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 
-import * as SudokuActions from '../actions/sudoku'
+import { generateGame } from '../actions/sudoku'
 
 import TopBar from './TopBar'
 import TopMenu from './TopMenu'
@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
 class MainView extends Component {
   componentWillMount() {
     StatusBar.setHidden(true)
-    this.props.actions.generateGame()
+    this.props.dispatch(generateGame())
   }
 
   render() {
-    if (this.props.sudoku.isLoading) {
+    if (this.props.isLoading) {
       return (
         <View>
           <Text>Loading...</Text>
@@ -62,18 +62,10 @@ class MainView extends Component {
           <TopMenu />
         </View>
         <View style={styles.sudokuBoardContainer} >
-          <SudokuBoard
-            selectedNumber={this.props.sudoku.selectedNumber}
-            affectedIndexes={this.props.sudoku.affectedIndexes}
-            board={this.props.sudoku.board}
-          />
+          <SudokuBoard />
         </View>
         <View style={styles.sudokuNumberButtonsContainer} >
-          <SudokuNumberButtons
-            actions={this.props.actions}
-            board={this.props.sudoku.board}
-            selectedIndex={this.props.sudoku.selectedNumber}
-          />
+          <SudokuNumberButtons />
         </View>
       </View>
     )
@@ -83,19 +75,18 @@ class MainView extends Component {
 
 MainView.propTypes = {
   dispatch: React.PropTypes.func,
-  actions: React.PropTypes.object,
-  sudoku: React.PropTypes.object,
+  isLoading: React.PropTypes.bool,
 }
 
 const mapStateToProps = (state) => {
   return {
-    sudoku: state.sudoku,
+    isLoading: state.sudoku.isLoading,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(SudokuActions, dispatch),
+    dispatch,
   }
 }
 

@@ -4,8 +4,8 @@ import sudoku from '../containers/sudoku.js'
 import {
   COLS,
   ROWS,
-  INDEXES,
-  SUDOKU_SELECT_INDEX,
+  // INDEXES,
+  // SUDOKU_SELECT_INDEX,
   SUDOKU_CLEAR_SELECTION,
   SUDOKU_NEW_GAME,
   SUDOKU_INSERT_NUMBER,
@@ -37,14 +37,22 @@ export function generateGame(difficulty = 'medium') {
   }
 }
 
-export function insertNumber(number, selectedIndex, board) {
-  const newBoard = board
-  newBoard[selectedIndex] = number
-
+// export function insertNumber(number, selectedIndex, board) {
+export function insertNumber(number) {
+  // return (dispatch) => {
+    // const state = getState()
   return {
     type: SUDOKU_INSERT_NUMBER,
-    payload: newBoard,
+    payload: number,
   }
+  // }
+  // const newBoard = board
+  // newBoard[selectedIndex] = number
+  //
+  // return {
+  //   type: SUDOKU_INSERT_NUMBER,
+  //   payload: newBoard,
+  // }
 }
 
 export function updateAffected(index) {
@@ -82,6 +90,6 @@ export function selectIndex(index) {
       type: 'SUDOKU_SELECT_INDEX',
       payload: index,
     })
-    dispatch(updateAffected(index))
+    // dispatch(updateAffected(index))
   }
 }

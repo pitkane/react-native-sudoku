@@ -6,6 +6,7 @@ import React, {
   Dimensions,
 } from 'react-native'
 import _ from 'lodash'
+import { connect } from 'react-redux'
 
 import SudokuNumber from './SudokuNumber'
 
@@ -66,7 +67,7 @@ class SudokuBoard extends Component {
           if (column === '3' || column === '6') appendStyle.push(styles.borderRight)
           else if (column === '4' || column === '7') appendStyle.push(styles.borderLeft)
 
-          if (this.props.selectedNumber === key) {
+          if (this.props.selectedIndex === key) {
             isSelected = true
           }
           if (_.get(this.props.affectedIndexes, key) !== undefined) {
@@ -74,6 +75,7 @@ class SudokuBoard extends Component {
           }
           return (
             <SudokuNumber
+              dispatch={this.props.dispatch}
               appendStyle={appendStyle}
               isAffected={isAffected}
               selected={isSelected}
@@ -89,9 +91,18 @@ class SudokuBoard extends Component {
 }
 
 SudokuBoard.propTypes = {
+  dispatch: React.PropTypes.func,
   board: React.PropTypes.object.isRequired,
-  selectedNumber: React.PropTypes.string,
+  selectedIndex: React.PropTypes.string,
   affectedIndexes: React.PropTypes.object,
 }
 
-export default SudokuBoard
+const mapStateToProps = (state) => {
+  return {
+    board: state.sudoku.board,
+    selectedIndex: state.sudoku.selectedIndex,
+    affectedIndexes: state.sudoku.affectedIndexes,
+  }
+}
+
+export default connect(mapStateToProps)(SudokuBoard)

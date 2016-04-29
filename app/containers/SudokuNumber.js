@@ -5,8 +5,9 @@ import React, {
   TouchableHighlight,
   Dimensions,
 } from 'react-native'
-import { connect } from 'react-redux'
-import * as SudokuActions from '../actions/sudoku'
+// import { connect } from 'react-redux'
+import { selectIndex } from '../actions/sudoku'
+// import * as SudokuActions from '../actions/sudoku'
 import _ from 'lodash'
 
 const styles = StyleSheet.create({
@@ -53,6 +54,7 @@ class SudokuNumber extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // console.log('RECEIVING PROPS')
     this.setState({ number: nextProps.number })
 
     if (nextProps.selected) {
@@ -71,10 +73,15 @@ class SudokuNumber extends Component {
     if (this.state.selected) {
       this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
     } else {
+      // this.setState({ selected: true })
+      this.setState({ selected: true })
+      this.props.dispatch(selectIndex(this.props.keyId))
+      // this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
+
       // this.props.dispatch({ type: 'SUDOKU_SELECT_NUMBER', payload: this.props.keyId })
       // this.props.dispatch(SudokuActions.selectNumber(this.props.keyId))
       // this.setState({ selected: true })
-      this.props.dispatch(SudokuActions.selectIndex(this.props.keyId))
+      // this.props.dispatch(SudokuActions.selectIndex(this.props.keyId))
       // .then(() => {
       //   this.props.dispatch(SudokuActions.updateAffected(this.props.keyId))
       // })
@@ -113,4 +120,4 @@ SudokuNumber.propTypes = {
   appendStyle: React.PropTypes.array,
 }
 
-export default connect()(SudokuNumber)
+export default SudokuNumber
