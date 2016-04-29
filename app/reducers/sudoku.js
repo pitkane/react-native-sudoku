@@ -26,14 +26,15 @@ export default function sudoku(state = defaultState, action) {
       return Object.assign({}, state, { affectedIndexes: action.payload })
     }
     case 'SUDOKU_CLEAR_SELECTION': {
-      return Object.assign({}, state, { selectedNumber: null, affectedIndexes: null })
+      return Object.assign({}, state, { selectedIndex: null, affectedIndexes: null })
     }
     // case 'SUDOKU_INSERT_NUMBER':
     //   return Object.assign({}, state, { board: action.payload })
     case 'SUDOKU_INSERT_NUMBER': {
       const newBoard = state.board
       newBoard[state.selectedIndex] = action.payload
-      return Object.assign({}, state, { board: newBoard })
+      console.log('wut')
+      return Object.assign({}, state, { board: newBoard, selectedIndex: null })
     }
     case 'SUDOKU_STOP_PLAYING': {
       return Object.assign({}, state, { playing: false })

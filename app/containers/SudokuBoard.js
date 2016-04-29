@@ -45,6 +45,10 @@ class SudokuBoard extends Component {
   componentDidMount() {
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+  }
+
   render() {
     const board = this.props.board
     return (

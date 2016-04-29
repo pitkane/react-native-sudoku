@@ -74,7 +74,7 @@ class SudokuNumber extends Component {
       this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
     } else {
       // this.setState({ selected: true })
-      this.setState({ selected: true })
+      // this.setState({ selected: true })
       this.props.dispatch(selectIndex(this.props.keyId))
       // this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
 
