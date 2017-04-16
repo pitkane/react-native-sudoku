@@ -7,7 +7,7 @@ import _ from "lodash";
 
 class BoardCell extends Component {
   _onPressButton = () => {
-    if (!this.props.selected) {
+    if (!this.props.selected && this.props.original === false) {
       this.props.selectCell(this.props.id);
     }
   };
@@ -19,11 +19,12 @@ class BoardCell extends Component {
       this.props.selected && styles.selected,
       this.props.isAffected && styles.affected
     ];
+    const appendOriginal = this.props.original ? styles.original : null;
     const computedStyle = defaultStyle.concat(this.props.appendStyle);
 
     return (
       <TouchableHighlight onPress={this._onPressButton} style={computedStyle}>
-        <Text style={styles.textStyle}>
+        <Text style={[styles.textStyle, appendOriginal]}>
           {this.props.number}
         </Text>
       </TouchableHighlight>
@@ -33,9 +34,11 @@ class BoardCell extends Component {
 
 mapStateToProps = (state, ownProps) => {
   // console.log("WUT: ", state, ownProps);
+  const cell = state.board.board[ownProps.id];
   return {
-    number: state.board.board[ownProps.id].number,
-    selected: state.board.board[ownProps.id].selected
+    number: cell.number,
+    selected: cell.selected,
+    original: cell.original
   };
 };
 
@@ -54,6 +57,9 @@ const styles = {
   selected: {
     backgroundColor: "#aaacb1",
     borderWidth: 1
+  },
+  original: {
+    // textDecorationLine: "underline"
   },
   affected: {
     borderColor: "#00aca6",

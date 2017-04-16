@@ -1,15 +1,8 @@
-import { BOARD_SELECT_CELL, BOARD_GENERATE_NEW } from "../actions/types";
-
-// export default function(state = {}, action) {
-//   switch (action.type) {
-//     case FACEBOOK_LOGIN_SUCCESS:
-//       return { token: action.payload };
-//     case FACEBOOK_LOGIN_FAIL:
-//       return { token: null };
-//     default:
-//       return state;
-//   }
-// }
+import {
+  BOARD_SELECT_CELL,
+  BOARD_GENERATE_NEW,
+  BOARD_INSERT_NUMBER
+} from "../actions/types";
 
 const defaultState = {
   board: null,
@@ -48,6 +41,20 @@ export default (state = defaultState, action) => {
         isLoading: false,
         playing: true
       });
+    }
+    case BOARD_INSERT_NUMBER: {
+      if (state.selectedCell) {
+        // debugger;
+        const newBoard = state.board;
+        newBoard[state.selectedCell].number = action.payload;
+        newBoard[state.selectedCell].selected = false;
+        return Object.assign({}, state, {
+          board: newBoard,
+          selectedCell: null
+        });
+      } else {
+        return state;
+      }
     }
     default: {
       return state;

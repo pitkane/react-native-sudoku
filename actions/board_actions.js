@@ -3,7 +3,18 @@ import sudoku from "../services/sudoku";
 import _ from "lodash";
 
 import { COLS, ROWS } from "../constants";
-import { BOARD_SELECT_CELL, BOARD_GENERATE_NEW } from "./types";
+import {
+  BOARD_SELECT_CELL,
+  BOARD_GENERATE_NEW,
+  BOARD_INSERT_NUMBER
+} from "./types";
+
+export const insertNumber = number => {
+  return {
+    payload: number,
+    type: BOARD_INSERT_NUMBER
+  };
+};
 
 export const selectCell = cell => {
   console.log("selectCell action with cell: ", cell);
@@ -21,7 +32,8 @@ export const generateNewBoard = (difficulty = "medium") => {
     for (const colItem of COLS) {
       newBoard[rowItem + colItem] = {
         number: null,
-        selected: false
+        selected: false,
+        original: false
       };
     }
   }
@@ -30,6 +42,7 @@ export const generateNewBoard = (difficulty = "medium") => {
   const puzzle = sudoku.generate(difficulty);
   _.map(puzzle, (cell, index) => {
     newBoard[index].number = cell;
+    newBoard[index].original = true;
   });
 
   console.log(`New (${difficulty})board created`, newBoard);

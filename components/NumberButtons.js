@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, TouchableHighlight, Dimensions, View } from "react-native";
 import { connect } from "react-redux";
+import * as actions from "../actions";
 // import { insertNumber, clearSelection } from "../actions/sudoku";
 
 const topRow = ["1", "2", "3", "4", "5"];
@@ -9,6 +10,7 @@ const bottomRow = ["6", "7", "8", "9", "X"];
 class NumberButtons extends Component {
   _onNumberPress = number => {
     if (this.props.selectedIndex !== null) {
+      this.props.insertNumber(number);
       // this.props.dispatch(insertNumber(number))
       // this.props.dispatch(clearSelection())
     }
@@ -19,7 +21,7 @@ class NumberButtons extends Component {
       <TouchableHighlight
         key={number}
         style={styles.numberContainer}
-        onPress={this._onNumberPress(number)}
+        onPress={() => this._onNumberPress(number)}
       >
         <Text style={styles.numberText}>
           {number}
@@ -52,7 +54,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(NumberButtons);
+export default connect(null, actions)(NumberButtons);
 
 const styles = {
   container: {
