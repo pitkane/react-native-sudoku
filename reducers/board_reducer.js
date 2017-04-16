@@ -27,8 +27,18 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case BOARD_SELECT_CELL: {
-      console.log("@ BOARD_SELECT_CELL reducer");
-      return Object.assign({}, state, { selectedCell: action.payload });
+      console.log("@ BOARD_SELECT_CELL reducer. Payload:", action.payload);
+      // debugger;
+      const selectedCell = action.payload;
+      const oldselectedCell = state.selectedCell;
+      const newBoard = state.board;
+      newBoard[selectedCell].selected = true;
+      if (oldselectedCell) newBoard[oldselectedCell].selected = false;
+
+      return Object.assign({}, state, {
+        board: newBoard,
+        selectedCell: action.payload
+      });
     }
     case BOARD_GENERATE_NEW: {
       const newBoard = action.payload;

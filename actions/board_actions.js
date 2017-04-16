@@ -17,8 +17,8 @@ export const generateNewBoard = (difficulty = "medium") => {
   const newBoard = {};
 
   // initialize empty board
-  for (const colItem of COLS) {
-    for (const rowItem of ROWS) {
+  for (const rowItem of ROWS) {
+    for (const colItem of COLS) {
       newBoard[rowItem + colItem] = {
         number: null,
         selected: false
