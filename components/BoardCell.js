@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Text, TouchableHighlight, Dimensions } from "react-native";
-// import { connect } from 'react-redux'
+import { connect } from "react-redux";
 // import { selectIndex } from '../actions/sudoku'
-// import * as SudokuActions from '../actions/sudoku'
+import * as actions from "../actions";
 import _ from "lodash";
 
-class SudokuNumber extends Component {
+class BoardCell extends Component {
   state = {
     number: this.props.number,
     selected: false,
@@ -32,7 +32,8 @@ class SudokuNumber extends Component {
     if (this.state.selected) {
       // this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
     } else {
-      // this.props.dispatch(selectIndex(this.props.keyId))
+      console.log(this.props);
+      this.props.selectCell(this.props.id);
       // old
       // this.props.dispatch({ type: 'SUDOKU_CLEAR_SELECTION' })
       // this.props.dispatch({ type: 'SUDOKU_SELECT_NUMBER', payload: this.props.keyId })
@@ -65,7 +66,7 @@ class SudokuNumber extends Component {
   }
 }
 
-export default SudokuNumber;
+export default connect(null, actions)(BoardCell);
 
 const styles = {
   numberContainer: {

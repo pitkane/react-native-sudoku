@@ -4,7 +4,7 @@
 
 https://trello.com/b/87OHkL33/react-native-sudoku
 
-- Rendering way too much stuff on state change. Either isolate changing object further down the tree, or just make more things with images ;) Now everything is drawn with css, so everything should also be pixel perfect, but to cost of processing all that is not worth it, I guess... And Sudokuboard.js if-hell looks awful...
+- Rendering way too much stuff on state change. Either isolate changing object further down the tree, or just make more things with images ;) Now everything is drawn with css, so everything should also be pixel perfect, but to cost of processing all that is not worth it, I guess... And Board.js if-hell looks awful...
 
 - "Slow" redux actions. Selecting board field takes 140ms, clearing field 130ms. At least user should see updates much faster, cos it affects user experience so much.
 

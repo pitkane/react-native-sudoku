@@ -6,15 +6,15 @@ import * as actions from "../actions";
 
 import TopBar from "../components/TopBar";
 import TopMenu from "../components/TopMenu";
-import SudokuBoard from "../components/SudokuBoard";
-import SudokuNumberButtons from "../components/SudokuNumberButtons";
+import Board from "../components/Board";
+import NumberButtons from "../components/NumberButtons";
 
 class BoardScreen extends Component {
   static navigationOptions = {};
 
   componentWillMount() {
     StatusBar.setHidden(true);
-    // this.props.generateNewGame();
+    this.props.generateNewBoard();
   }
 
   render() {
@@ -34,10 +34,10 @@ class BoardScreen extends Component {
           <TopMenu />
         </View>
         <View style={styles.sudokuBoardContainer}>
-          <SudokuBoard />
+          <Board />
         </View>
         <View style={styles.sudokuNumberButtonsContainer}>
-          <SudokuNumberButtons />
+          <NumberButtons />
         </View>
       </View>
     );
@@ -46,11 +46,11 @@ class BoardScreen extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.game.isLoading
+    isLoading: state.board.isLoading
   };
 };
 
-export default connect(mapStateToProps, null)(BoardScreen);
+export default connect(mapStateToProps, actions)(BoardScreen);
 
 const styles = {
   mainContainer: {

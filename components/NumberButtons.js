@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 const topRow = ["1", "2", "3", "4", "5"];
 const bottomRow = ["6", "7", "8", "9", "X"];
 
-class SudokuNumberButtons extends Component {
+class NumberButtons extends Component {
   _onNumberPress = number => {
     if (this.props.selectedIndex !== null) {
       // this.props.dispatch(insertNumber(number))
@@ -52,7 +52,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(SudokuNumberButtons);
+export default connect(mapStateToProps, null)(NumberButtons);
 
 const styles = {
   container: {
