@@ -31,7 +31,7 @@ class BoardScreen extends Component {
           <TopBar />
         </View>
         <View style={styles.topMenuContainer}>
-          <TopMenu />
+          <TopMenu navigation={this.props.navigation} />
         </View>
         <View style={styles.sudokuBoardContainer}>
           <Board />

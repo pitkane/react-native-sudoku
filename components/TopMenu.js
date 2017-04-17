@@ -1,25 +1,38 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { Text, View, TouchableHighlight } from "react-native";
+import { Button } from "react-native-elements";
 
 class TopMenu extends Component {
+  drawerOpen = () => {
+    console.log(this.props);
+    this.props.navigation.navigate("DrawerOpen");
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.menuButton}>
-          <Text style={styles.menuButtonText}>
-            Menu
-          </Text>
+
+        <View style={styles.ButtonContainer}>
+          <TouchableHighlight
+            onPress={this.drawerOpen}
+            style={styles.ButtonTouchable}
+          >
+            <Text style={styles.ButtonText}>Menu</Text>
+          </TouchableHighlight>
         </View>
-        <View style={styles.noteButton}>
-          <Text style={styles.noteButtonText}>
+
+        <View style={styles.ButtonContainer}>
+          <Text style={styles.ButtonText}>
             Note
           </Text>
         </View>
-        <View style={styles.hintsButtons}>
-          <Text style={styles.hintsButtonText}>
+
+        <View style={styles.ButtonContainer}>
+          <Text style={styles.ButtonText}>
             Hints
           </Text>
         </View>
+
       </View>
     );
   }
@@ -34,27 +47,17 @@ const styles = {
     alignItems: "center",
     backgroundColor: "#ff8068"
   },
-  menuButton: {
+  ButtonContainer: {
     flex: 1,
     alignItems: "center"
   },
-  menuButtonText: {
-    color: "white",
-    fontSize: 16
-  },
-  noteButton: {
+  ButtonTouchable: {
     flex: 1,
-    alignItems: "center"
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "stretch"
   },
-  noteButtonText: {
-    color: "white",
-    fontSize: 16
-  },
-  hintsButtons: {
-    flex: 1,
-    alignItems: "center"
-  },
-  hintsButtonText: {
+  ButtonText: {
     color: "white",
     fontSize: 16
   }

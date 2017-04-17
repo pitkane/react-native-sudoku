@@ -1,6 +1,6 @@
 {
   "name": "react-native-sudoku",
-  "description": "An empty new project",
+  "description": "React Native Sudoku",
   "slug": "react-native-sudoku",
   "privacy": "public",
   "sdkVersion": "15.0.0",
@@ -13,7 +13,10 @@
     "hideExponentText": false
   },
   "packagerOpts": {
-    "assetExts": ["ttf", "mp4"]
+    "assetExts": [
+      "ttf",
+      "mp4"
+    ]
   },
   "ios": {
     "supportsTablet": true

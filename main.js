@@ -1,7 +1,11 @@
 import Expo from "expo";
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-import { TabNavigator, StackNavigator } from "react-navigation";
+import {
+  TabNavigator,
+  StackNavigator,
+  DrawerNavigator
+} from "react-navigation";
 import { Provider } from "react-redux";
 
 import store from "./store";
@@ -9,11 +13,11 @@ import BoardScreen from "./screens/BoardScreen";
 
 class App extends Component {
   render() {
-    const MainNavigator = StackNavigator(
+    const MainNavigator = DrawerNavigator(
       {
         board: { screen: BoardScreen }
-      },
-      { headerMode: "none" }
+      } // ,
+      // { headerMode: "none" }
     );
 
     return (
