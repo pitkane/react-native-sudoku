@@ -10,7 +10,9 @@ import Board from "../components/Board";
 import NumberButtons from "../components/NumberButtons";
 
 class BoardScreen extends Component {
-  static navigationOptions = {};
+  static navigationOptions = {
+    title: "Board"
+  };
 
   componentWillMount() {
     StatusBar.setHidden(true);
