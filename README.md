@@ -1,6 +1,6 @@
 # React-Native flavored Sudoku
 
-![React-Native flavored Sudoku](https://drie.google.com/uc?export=download&id=0BwWdduICTQArdmswdWh0LXVuWXM)
+![React-Native flavored Sudoku](https://drive.google.com/uc?export=download&id=0BwWdduICTQArdmswdWh0LXVuWXM)
 
 https://trello.com/b/87OHkL33/react-native-sudoku
 
