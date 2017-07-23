@@ -2,6 +2,8 @@
 
 ![React-Native flavored Sudoku](https://drive.google.com/uc?export=download&id=0BwWdduICTQArdmswdWh0LXVuWXM)
 
+# Very old README.md content ;)
+
 https://trello.com/b/87OHkL33/react-native-sudoku
 
 - Rendering way too much stuff on state change. Either isolate changing object further down the tree, or just make more things with images ;) Now everything is drawn with css, so everything should also be pixel perfect, but to cost of processing all that is not worth it, I guess... And Board.js if-hell looks awful...
