@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 46260,
+  "expoServerNgrokUrl": "https://ww-kwu.mikpit.react-native-sudoku.exp.direct",
+  "packagerNgrokUrl": "https://packager.ww-kwu.mikpit.react-native-sudoku.exp.direct",
+  "ngrokPid": 46284
 }
